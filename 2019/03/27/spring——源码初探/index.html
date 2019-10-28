@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="spring,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="spring-corespring框架的核心包为spring-core，其内部结构如下图：  其中包括了asm字节码操作支持、cglib代理支持、lang（NotNull）类型限定支持、objenesis对象实例化支持，自用的util工具类库，以及对spring框架的核心类库支持core：  从子包来看，核心类库主要包括annotation注解、codec编解码、convert类型转换、env环境">
+<meta name="keywords" content="spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring——源码初探">
+<meta property="og:url" content="http://thas.cc/2019/03/27/spring——源码初探/index.html">
+<meta property="og:site_name" content="ThasBlog">
+<meta property="og:description" content="spring-corespring框架的核心包为spring-core，其内部结构如下图：  其中包括了asm字节码操作支持、cglib代理支持、lang（NotNull）类型限定支持、objenesis对象实例化支持，自用的util工具类库，以及对spring框架的核心类库支持core：  从子包来看，核心类库主要包括annotation注解、codec编解码、convert类型转换、env环境">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://thas.cc/2019/03/27/spring——源码初探/20190401114608854_28132.png">
+<meta property="og:image" content="http://thas.cc/2019/03/27/spring——源码初探/20190401114957827_31033.png">
+<meta property="og:image" content="http://thas.cc/2019/03/27/spring——源码初探/20190401160734309_1876.png">
+<meta property="og:updated_time" content="2019-10-28T02:35:49.567Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spring——源码初探">
+<meta name="twitter:description" content="spring-corespring框架的核心包为spring-core，其内部结构如下图：  其中包括了asm字节码操作支持、cglib代理支持、lang（NotNull）类型限定支持、objenesis对象实例化支持，自用的util工具类库，以及对spring框架的核心类库支持core：  从子包来看，核心类库主要包括annotation注解、codec编解码、convert类型转换、env环境">
+<meta name="twitter:image" content="http://thas.cc/2019/03/27/spring——源码初探/20190401114608854_28132.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://thas.cc/2019/03/27/spring——源码初探/">
+
+
+
+
+
+  <title>spring——源码初探 | ThasBlog</title>
+  
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/prism-base16-ateliersulphurpool.light.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ThasBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://thas.cc/2019/03/27/spring——源码初探/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Thas">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ThasBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">spring——源码初探</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-27T06:53:52+00:00">
+                2019-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/源码解读/" itemprop="url" rel="index">
+                    <span itemprop="name">源码解读</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="spring-core"><a href="#spring-core" class="headerlink" title="spring-core"></a>spring-core</h2><p>spring框架的核心包为spring-core，其内部结构如下图：</p>
+<p><img src="/2019/03/27/spring——源码初探/20190401114608854_28132.png" alt></p>
+<p>其中包括了asm字节码操作支持、cglib代理支持、lang（NotNull）类型限定支持、objenesis对象实例化支持，自用的util工具类库，以及对spring框架的核心类库支持core：</p>
+<p><img src="/2019/03/27/spring——源码初探/20190401114957827_31033.png" alt></p>
+<p>从子包来看，核心类库主要包括annotation注解、codec编解码、convert类型转换、env环境配置、io操作、log日志、serializer序列化工具（使用java自带的）、style字符串输出美化、task（定时/异步/同步）任务调度、type（Java反射类型）。</p>
+<p>其实spring-core还有一个依赖的spring-jcl，其只是集成了<code>commons-logging</code>提供的日志规范，内部依赖的是slf4j日志框架，并适配了log4j日志框架。如果缺少依赖将使用NoOpLog，所有日志输出都会忽略。（比较常见的一种自定义日志框架思路）。</p>
+<h2 id="spring-expression"><a href="#spring-expression" class="headerlink" title="spring-expression"></a>spring-expression</h2><p>提供SpEl表达式的支持。${}只能替换字符串，#{}可以执行运算和方法</p>
+<h2 id="spring-bean"><a href="#spring-bean" class="headerlink" title="spring-bean"></a>spring-bean</h2><p>提供BeanFactory和FactoryBean的规范。</p>
+<ul>
+<li>BeanFactory是bean的生产工厂，spring容器就是基于此来实现的。</li>
+<li>FactoryBean是用来创建特定bean实例的工厂，为融合进spring框架的其他插件提供规范，比如Mybatis就实现了<code>SqlSessionFactoryBean</code>，用于创建<code>SqlSessionFactory</code>的实例。</li>
+</ul>
+<h2 id="spring-aop"><a href="#spring-aop" class="headerlink" title="spring-aop"></a>spring-aop</h2><p>aop切面编程所依赖的包，spring-aop整合进了aop联盟的标准类库，所以实际使用并不需要导入aopalliance包。spring提供了切面编程所需要的interceptor拦截器和advisor通知器以及代理创建工厂。spring-aop需要创建代理和注入代理对象，因此其依赖spring-core和spring-bean。</p>
+<p>需要注意的是，spring-aop是为用户提供的：</p>
+<ul>
+<li>spring-aop是不依赖aspectj的，在spring-context中提供了对aspectj的支持，通过<code>EnableAspectJAutoProxy</code>使用aspectj提供的aop，aspect、around、after这些比较高级的切面编程用法都是由aspectj提供的</li>
+<li>spring-tx虽然也是属于切面编程，但是其并不依赖spring-aop，自己实现了一套切面代理。</li>
+<li>spring-mvc中的interceptor不属于切面编程。</li>
+</ul>
+<h2 id="spring-context"><a href="#spring-context" class="headerlink" title="spring-context"></a>spring-context</h2><p>这个就比较牛逼了，内容非常多，包括cache缓存、context应用上下文、jmx管理扩展、remoting远程调用、scheduling定时任务、scripting脚本引擎、validation数据验证、stereotype容器注入注解、还有ui所需的数据模型ModelMap（<code>BindingAwareModelMap</code>在validation中）。这里的ui、model并非就单单是指web中的ui和模型。</p>
+<p><img src="/2019/03/27/spring——源码初探/20190401160734309_1876.png" alt></p>
+<h2 id="spring-context-support"><a href="#spring-context-support" class="headerlink" title="spring-context-support"></a>spring-context-support</h2><p>spring-context的扩展支持，注意是定时任务和freemarker支持。freemarker不仅仅只是web视图引擎。</p>
+<h2 id="spring-tx"><a href="#spring-tx" class="headerlink" title="spring-tx"></a>spring-tx</h2><p>spring事务支持。分别对dao和jca进行了实现。</p>
+<h2 id="spring-jdbc"><a href="#spring-jdbc" class="headerlink" title="spring-jdbc"></a>spring-jdbc</h2><p>jdbc支持。依赖spring-tx，以实现DataSourceTransactionManager，数据源的事务管理支持。</p>
+<h2 id="spring-web"><a href="#spring-web" class="headerlink" title="spring-web"></a>spring-web</h2><p>web连接方面的支持，其只依赖spring-core和spring-bean</p>
+<h2 id="spring-webmvc"><a href="#spring-webmvc" class="headerlink" title="spring-webmvc"></a>spring-webmvc</h2><p>webmvc框架支持，其使用spring-web实现web通信，使用spring-context进行web应用上下文管理。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spring/" rel="tag"># spring</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/26/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/27/spring-mvc——源码初探/" rel="prev" title="spring-mvc——源码初探">
+                spring-mvc——源码初探 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Thas</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#spring-core"><span class="nav-number">1.</span> <span class="nav-text">spring-core</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring-expression"><span class="nav-number">2.</span> <span class="nav-text">spring-expression</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring-bean"><span class="nav-number">3.</span> <span class="nav-text">spring-bean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring-aop"><span class="nav-number">4.</span> <span class="nav-text">spring-aop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring-context"><span class="nav-number">5.</span> <span class="nav-text">spring-context</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring-context-support"><span class="nav-number">6.</span> <span class="nav-text">spring-context-support</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring-tx"><span class="nav-number">7.</span> <span class="nav-text">spring-tx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring-jdbc"><span class="nav-number">8.</span> <span class="nav-text">spring-jdbc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring-web"><span class="nav-number">9.</span> <span class="nav-text">spring-web</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring-webmvc"><span class="nav-number">10.</span> <span class="nav-text">spring-webmvc</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Thas</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"debug":false,"model":{"jsonPath":"live2d-widget-model-wanko"},"display":{"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-200},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="spring,springboot,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="对springboot的理解springboot是一个基于约定大于配置理念的整合框架，可以以最少的（手动）配置文件快速构建和启动项目，这并不是说框架中就没有配置文件，而是默认的配置文件都整个到了类似boot-starter格式的jar包中，一般情况下不再需要开发者手动去覆盖配置了。springboot除了针对自家的框架推出了starter的快速启动方案之外，还约定了一套便于其他非spring框架整">
+<meta name="keywords" content="spring,springboot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springboot-源码初探">
+<meta property="og:url" content="http://thas.cc/2019/04/18/springboot——源码初探/index.html">
+<meta property="og:site_name" content="ThasBlog">
+<meta property="og:description" content="对springboot的理解springboot是一个基于约定大于配置理念的整合框架，可以以最少的（手动）配置文件快速构建和启动项目，这并不是说框架中就没有配置文件，而是默认的配置文件都整个到了类似boot-starter格式的jar包中，一般情况下不再需要开发者手动去覆盖配置了。springboot除了针对自家的框架推出了starter的快速启动方案之外，还约定了一套便于其他非spring框架整">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://thas.cc/2019/04/18/springboot——源码初探/20190505105239899_12478.png">
+<meta property="og:updated_time" content="2019-10-28T02:35:49.567Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="springboot-源码初探">
+<meta name="twitter:description" content="对springboot的理解springboot是一个基于约定大于配置理念的整合框架，可以以最少的（手动）配置文件快速构建和启动项目，这并不是说框架中就没有配置文件，而是默认的配置文件都整个到了类似boot-starter格式的jar包中，一般情况下不再需要开发者手动去覆盖配置了。springboot除了针对自家的框架推出了starter的快速启动方案之外，还约定了一套便于其他非spring框架整">
+<meta name="twitter:image" content="http://thas.cc/2019/04/18/springboot——源码初探/20190505105239899_12478.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://thas.cc/2019/04/18/springboot——源码初探/">
+
+
+
+
+
+  <title>springboot-源码初探 | ThasBlog</title>
+  
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/prism-base16-ateliersulphurpool.light.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ThasBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://thas.cc/2019/04/18/springboot——源码初探/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Thas">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ThasBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">springboot-源码初探</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-18T08:34:03+00:00">
+                2019-04-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/源码解读/" itemprop="url" rel="index">
+                    <span itemprop="name">源码解读</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="对springboot的理解"><a href="#对springboot的理解" class="headerlink" title="对springboot的理解"></a>对springboot的理解</h2><p>springboot是一个基于约定大于配置理念的整合框架，可以以最少的（手动）配置文件快速构建和启动项目，这并不是说框架中就没有配置文件，而是默认的配置文件都整个到了类似<code>boot-starter</code>格式的jar包中，一般情况下不再需要开发者手动去覆盖配置了。springboot除了针对自家的框架推出了<code>starter</code>的快速启动方案之外，还约定了一套便于其他非spring框架整合进springboot的规范，知名的比如<code>mybatis-spring-boot-starter</code>就是按该规范整合进了springboot框架（该快速启动框架不是spring开发的，spring只提供了规范）。</p>
+<h2 id="spring-boot-starter启动入口"><a href="#spring-boot-starter启动入口" class="headerlink" title="spring-boot-starter启动入口"></a>spring-boot-starter启动入口</h2><p>本质上需要创建一个<code>SpringApplication</code>对象，并调用run方法开始执行。有两种方式创建：</p>
+<ol>
+<li>使用该对象提供的静态方法<code>run</code>：<pre class=" language-java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">static</span> ConfigurableApplicationContext <span class="token function">run</span><span class="token punctuation">(</span>Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> primarySource<span class="token punctuation">,</span> String<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token keyword">return</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Class</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span>primarySource<span class="token punctuation">}</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+ <span class="token keyword">public</span> <span class="token keyword">static</span> ConfigurableApplicationContext <span class="token function">run</span><span class="token punctuation">(</span>Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span><span class="token punctuation">[</span><span class="token punctuation">]</span> primarySources<span class="token punctuation">,</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">SpringApplication</span><span class="token punctuation">(</span>primarySources<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+</code></pre>
+</li>
+<li>使用<code>SpringApplicationBuilder</code>：<pre class=" language-java"><code class="language-java"> <span class="token keyword">new</span> <span class="token class-name">SpringApplicationBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">source</span><span class="token punctuation">(</span>Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> primarySource<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>String<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token keyword">protected</span> SpringApplication <span class="token function">createSpringApplication</span><span class="token punctuation">(</span>Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> sources<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">SpringApplication</span><span class="token punctuation">(</span>sources<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+</code></pre>
+</li>
+</ol>
+<p>最核心的是要提供<code>primarySource</code>，其实就是基于该类所在的包扫描spring注解，命令行的启动参数也可以传递给run方法，用作spring的启动参数。<code>SpringApplicationBuilder</code>要比静态方法run灵活许多。</p>
+<p>再来说说非静态的run方法，也就是springboot启动的主要过程：</p>
+<ol>
+<li>该方法需要得到一个<code>ConfigurableApplicationContext</code>类型的对象，springboot应用并不一定就是web应用。</li>
+<li>扫描启动参数中提供的<code>SpringApplicationRunListeners</code>，spring的监听器是伴随spring的声明周期的，分为starting和started两个步骤：<pre class=" language-java"><code class="language-java"> <span class="token keyword">private</span> SpringApplicationRunListeners <span class="token function">getRunListeners</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span><span class="token punctuation">[</span><span class="token punctuation">]</span> types <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Class</span><span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span> SpringApplication<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token keyword">class</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+     <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">SpringApplicationRunListeners</span><span class="token punctuation">(</span>logger<span class="token punctuation">,</span> <span class="token function">getSpringFactoriesInstances</span><span class="token punctuation">(</span>
+             SpringApplicationRunListener<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> types<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+</code></pre>
+</li>
+<li>转换启动参数args和启动环境（包含配置文件），紧接着是一个spring的banner（(⊙o⊙)…）。</li>
+<li>然后就<code>createApplicationContext()</code>创建应用上下文了（空的），其中区分了普通servlet类型、reactive类型和非web类型，当然也可以提供自定义的<code>applicationContext</code>:<pre class=" language-java"><code class="language-java"> <span class="token keyword">protected</span> ConfigurableApplicationContext <span class="token function">createApplicationContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> contextClass <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>applicationContextClass<span class="token punctuation">;</span>
+     <span class="token keyword">if</span> <span class="token punctuation">(</span>contextClass <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         <span class="token keyword">try</span> <span class="token punctuation">{</span>
+             <span class="token keyword">switch</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>webApplicationType<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+             <span class="token keyword">case</span> SERVLET<span class="token operator">:</span>
+                 contextClass <span class="token operator">=</span> Class<span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span>DEFAULT_SERVLET_WEB_CONTEXT_CLASS<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                 <span class="token keyword">break</span><span class="token punctuation">;</span>
+             <span class="token keyword">case</span> REACTIVE<span class="token operator">:</span>
+                 contextClass <span class="token operator">=</span> Class<span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span>DEFAULT_REACTIVE_WEB_CONTEXT_CLASS<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                 <span class="token keyword">break</span><span class="token punctuation">;</span>
+             <span class="token keyword">default</span><span class="token operator">:</span>
+                 contextClass <span class="token operator">=</span> Class<span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span>DEFAULT_CONTEXT_CLASS<span class="token punctuation">)</span><span class="token punctuation">;</span>
+             <span class="token punctuation">}</span>
+         <span class="token punctuation">}</span>
+         <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ClassNotFoundException</span> ex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalStateException</span><span class="token punctuation">(</span>
+                     <span class="token string">"Unable create a default ApplicationContext, "</span>
+                             <span class="token operator">+</span> <span class="token string">"please specify an ApplicationContextClass"</span><span class="token punctuation">,</span>
+                     ex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token punctuation">}</span>
+     <span class="token punctuation">}</span>
+     <span class="token keyword">return</span> <span class="token punctuation">(</span>ConfigurableApplicationContext<span class="token punctuation">)</span> BeanUtils<span class="token punctuation">.</span><span class="token function">instantiateClass</span><span class="token punctuation">(</span>contextClass<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+</code></pre>
+</li>
+<li>接下去<code>prepareContext(context, environment, listeners, applicationArguments,printedBanner);</code>填充应用上下文，然后刷新应用上下文（初始化<code>BeanFactory</code>），自动配置类的注入是在这个步骤中实现的。</li>
+<li>最后是监听器的started方法，以及执行自定义的一些runner。</li>
+<li>整个过程如果发生异常，则会取消刷新过程，执行<h2 id="springboot自动配置规范"><a href="#springboot自动配置规范" class="headerlink" title="springboot自动配置规范"></a>springboot自动配置规范</h2>以<code>mybatis-spring-boot-starter</code>为例，依赖关系如下图：<br><img src="/2019/04/18/springboot——源码初探/20190505105239899_12478.png" alt="mybatis-spring-boot-starter依赖关系"></li>
+</ol>
+<p>核心的依赖便是主功能<code>mybatis</code>和快速配置相关的<code>spring-boot-starter</code>和<code>mybatis-spring-boot-autoconfigure</code>，<code>mybatis-spring</code>这个模块是为了使mybatis能够适配到spring框架，并不是springboot特有的，spring-mvc也会用到，比如<code>SqlSessionTemplate</code>和<code>MapperScanner</code>这个功能就是该模块提供的。</p>
+<p>一般来说<code>starter</code>这个模块是不包含代码的，它只包括模块依赖（pom）、<code>MANIFEST.MF</code>（支持环境）。</p>
+<p>然后跟自动配置相关的便是<code>mybatis-spring-boot-autoconfigure</code>，这个类中需要提供bean注入的配置类<code>Configuration</code>，当然，由于配置类需要扫描才能注入，显然现在并不符合这个条件。</p>
+<p>因此，<code>spring-boot-autoconfigure</code>提供了一种机制，spring会通过<code>SpringFactoriesLoader</code>扫描<code>META-INF</code>下的<code>spring.factories</code>文件，通过其中定义<code>org.springframework.boot.autoconfigure.EnableAutoConfiguration</code>属性来加载自动配置的类。</p>
+<p>因此springboot的自动配置依然是<code>Configuration</code>注解实现，只是绕了一点，通过<code>spring.factories</code>文件指定了该配置类的路径。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spring/" rel="tag"># spring</a>
+          
+            <a href="/tags/springboot/" rel="tag"># springboot</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/07/spring-tx——事务传播行为/" rel="next" title="spring-tx——事务传播行为">
+                <i class="fa fa-chevron-left"></i> spring-tx——事务传播行为
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/16/树莓派-Debian禁用IPv6/" rel="prev" title="树莓派/Debian禁用IPv6">
+                树莓派/Debian禁用IPv6 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Thas</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#对springboot的理解"><span class="nav-number">1.</span> <span class="nav-text">对springboot的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring-boot-starter启动入口"><span class="nav-number">2.</span> <span class="nav-text">spring-boot-starter启动入口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#springboot自动配置规范"><span class="nav-number">3.</span> <span class="nav-text">springboot自动配置规范</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Thas</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"debug":false,"model":{"jsonPath":"live2d-widget-model-wanko"},"display":{"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-200},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
