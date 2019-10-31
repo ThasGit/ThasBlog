@@ -229,7 +229,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://thas.cc/2019/06/05/novnc配置/">
+    <link itemprop="mainEntityOfPage" href="http://thas.cc/2019/10/28/Java基础知识/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Thas">
@@ -248,7 +248,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/06/05/novnc配置/" itemprop="url">novnc配置</a></h1>
+                <a class="post-title-link" href="/2019/10/28/Java基础知识/" itemprop="url">Java基础知识</a></h1>
         
 
         <div class="post-meta">
@@ -260,8 +260,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-05T22:10:31+08:00">
-                2019-06-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-28T10:35:49+08:00">
+                2019-10-28
               </time>
             
 
@@ -270,6 +270,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础知识/" itemprop="url" rel="index">
+                    <span itemprop="name">基础知识</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -300,7 +322,306 @@
       
         
           
+            <ul>
+<li>面向对象的特性<br>面向对象有三大特性：封装、继承、多态。</li>
+</ul>
+<ol>
+<li>封装是指将特定的实现细节通过访问权限控制的形式“隐藏”起来，调用者只需关注怎么用即可。</li>
+<li>继承是指某个类可以通过<code>extends</code>关键字继承其父类的全部成员，以实现代码复用和功能扩展的目的。继承是多态的前提。</li>
+<li>多态就是指多种形态，同一个方法可以根据不同的子类实现呈现出不同的功能，即重写；同一个对象可以在其继承链上进行类型转换，以适应目标场景的需求或减少对自身信息的暴露。一般情况下也会将方法重载视为重载的一部分。</li>
+<li>抽象是指将某一类事物的共同特征提取出来，而无需实现，这些抽象特征将具有更宽泛的使用场景，而具体实现交给具体的实现类去实现。</li>
+</ol>
+<ul>
+<li>访问权限修饰符<br>共有public、protected、default、private四个访问权限。</li>
+</ul>
+<ol>
+<li>public是完全的公开权限，任何地方都可以访问。</li>
+<li>protected是受保护的访问权限，同包全部类以及不同包下的子类可以访问。</li>
+<li>private是私有权限，仅本类或本类的内部类可以访问到。</li>
+<li>不写修饰符，非接口代表仅同包下的类可以访问，接口内的成员不管写不写修饰符都是public访问权限</li>
+</ol>
+<ul>
+<li><p>为什么有clone<br>clone是对于引用类型而言的，一个引用对象不管经过怎样的参数传递，其代表的都是堆上的同一个实例，如果想要复制出一个额外的实例，则必须新创建一个实例，并赋予与原对象相等的成员值。clone方法可以实现这种效果。</p>
+</li>
+<li><p>new和clone的区别</p>
+</li>
+</ul>
+<ol>
+<li>new会先在内存上开辟空间，然后执行构造方法，通过构造方法对类中的数据域填充新值，最后将该对象的引用地址返回给外部。</li>
+<li>clone方法同样也是开辟一段新的内存空间，然后复制原对象的数据域的内容到该数据域，最后将该对象的引用地址返回给外部。该复制操作是JVM自动进行的。</li>
+</ol>
+<ul>
+<li><p>深拷贝和浅拷贝的区别<br>两者区别是相对于拷贝类中的引用类型而言的，JVM自动实现的clone方法，在复制引用类型的成员变量的时候，复制的只是引用地址，两个实例的相同引用类型成员变量指向同一份成员实例，称之为浅拷贝。深度拷贝需要手动实现，针对类中的引用成员变量一一操作，手动clone出新的引用成员实例，然后绑定给成员变量。</p>
+</li>
+<li><p>java中的goto关键字<br>java保留了goto关键字，但是并没有实现。java中的break可以实现跳转语句的效果，但仅限于循环语句。</p>
+</li>
+<li><p>hashcode和equals<br>hashcode可以看做equals的低配版本，hashcode相同，equals不一定true；hashcode不同，equals一定为false。hashcode必须保证自反性、对称性、传递性和一致性。</p>
+</li>
+<li><p>String是否可以继承<br>String是final类型，不可以被继承。</p>
+</li>
+<li><p>Java中的引用类型传参<br>两种观点：</p>
+</li>
+</ul>
+<ol>
+<li>引用类型传参属于引用传递。传递的参数可以对原实例做修改。</li>
+<li>不属于引用传递。java中传递引用类型时实际上是实例引用的值传递。</li>
+</ol>
+<ul>
+<li>方法重写和重载的区别</li>
+</ul>
+<ol>
+<li>方法重写是指子类对父类已有的方法进行新的实现，从而替换掉原有的方法，对父类该方法的调用将会链接到子类重新实现的方法上。重写的必要前提是继承。</li>
+<li>方法重载是编译时多态，指可以定义多个方法名相同，但参数列表不相同的方法。</li>
+</ol>
+<ul>
+<li><p>方法重写的规则<br>方法名相同，参数列表完全相同，返回值相同或更加精确，异常列表相同、更少或更加精确，访问范围相同或更大。</p>
+</li>
+<li><p>为什么返回值类型不能用来区分重载方法<br>调用方法时是不能指定返回类型的，因此调用时不能区分返回值不同的方法。比如一个带返回值的方法，是可以不接收其返回值直接调用的。</p>
+</li>
+<li><p>char类型能够存储一个汉字<br>java中char统一使用Unicode编码保存字符，所以可以保存汉字。</p>
+</li>
+<li><p>抽象类和接口区别<br>抽象类和类的区别仅仅在于，抽象类可以包含抽象方法，不可以实例化。所以抽象类和接口的区别完全可以看做类和接口的关系，它们没有半毛钱的关系。都是用来表示抽象的概念，抽象类是对象本质的抽象，通常用于存放公共属性和方法；接口用来表示对象所具备的功能。</p>
+</li>
+</ul>
+<p>抽象类可以包含属性、实现或未实现的方法、构造方法，可以实现接口，继承类，只能单继承。</p>
+<p>接口只能包含抽象方法、常量、静态方法。</p>
+<ul>
+<li>抽象方法是否可以是static、native、synchronized</li>
+</ul>
+<ol>
+<li>抽象方法不可以是static的，static与实例无关，不支持运行时多态，不能通过子类来实现或者重写。</li>
+<li>抽象方法不能是native的，native方法是JVM自动实现的，不是由Java子类实现的。</li>
+<li>可以synchronized，synchronized修饰静态方法，表示锁定该类的Class对象。</li>
+</ol>
+<ul>
+<li><p>静态变量和实例变量的区别<br>静态变量与实例无关，当类加载到内存，并完成初始化之后，静态变量就能直接被使用，可以理解为类的所有实例的共享变量。<br>实例变量在类实例化时创建，只能通过创建它的实例访问到。</p>
+</li>
+<li><p>==和equals区别</p>
+</li>
+</ul>
+<ol>
+<li>==可以比较值类型或引用类型，判断值类型是否相等或引用类型是否指向同一实例。</li>
+<li>equals判断两个引用类型是否是“相等”，但默认情况，如果不对equals实现，其功能同==。</li>
+</ol>
+<ul>
+<li>break和continue区别</li>
+</ul>
+<ol>
+<li>break退出当前层的循环，加标签表示退出标签所表示层的循环。</li>
+<li>continue退出当前层的当次循环，加标签表示退出标签所示层的当次循环。</li>
+</ol>
+<ul>
+<li><p>Java实现多态的机制<br>通过使用父类型的变量指向子类的实例实现，父类的方法的实现取决于实例化的子类。</p>
+</li>
+<li><p>Java异常分类<br>Java异常大体分为受检查异常和运行时异常。</p>
+</li>
+</ul>
+<ol>
+<li>受检查异常：异常必须要显式处理，或抛出交给调用者处理。该种异常通常无法通过优化编码解决，但可以忽略或恢复，对后续运行不产生影响。</li>
+<li>运行时异常：异常可以不进行显式处理，该种异常一般可以通过优化编码的方式避免发生，比如空指针异常和索引超界异常。</li>
+<li>Error通常不归类到异常，Error是严重的错误，无法通过程序解决。</li>
+</ol>
+<p>* </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://thas.cc/2019/10/27/spring——spring是什么/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Thas">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ThasBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/27/spring——spring是什么/" itemprop="url">spring是什么</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
             
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-28T06:05:48+08:00">
+                2019-10-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/实用框架/" itemprop="url" rel="index">
+                    <span itemprop="name">实用框架</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="spring是什么"><a href="#spring是什么" class="headerlink" title="spring是什么"></a>spring是什么</h1><h2 id="什么是spring"><a href="#什么是spring" class="headerlink" title="什么是spring"></a>什么是spring</h2><p>(一般这么问是指spring-framework)。spring是一个便捷的开发快捷框架，它为企业和个人应用开发提供了基础的框架支持。</p>
+<p>spring-framework中包含的包有…太多了(<a href="https://github.com/spring-projects/spring-framework" target="_blank" rel="noopener">https://github.com/spring-projects/spring-framework</a>)</p>
+<h2 id="什么是开发框架？"><a href="#什么是开发框架？" class="headerlink" title="什么是开发框架？"></a>什么是开发框架？</h2><p>框架是软件项目的架子。开发框架一般具有支撑性、约束性、扩展性。</p>
+<blockquote>
+<p>IT语境中的框架，特指为解决一个开放性问题而设计的具有一定约束性的支撑结构。在此结构上可以根据具体问题扩展、安插更多的组成部分，从而更迅速和方便地构建完整的解决问题的方案</p>
+</blockquote>
+<h2 id="spring为什么非常流行"><a href="#spring为什么非常流行" class="headerlink" title="spring为什么非常流行"></a>spring为什么非常流行</h2><p>一个软件项目总不可避免的要遇上这个几点：</p>
+<ol>
+<li><p>异常和运行日志。这是最重要也最容易被忽略的，生产环境并不像开发调试一下，啥东西都能打印在控制台上，也并不是什么bug都能够被复现的，这时候只能通过日志来定位问题。<br> spring最基础的包便是<code>spring-jcl</code>，这个包提供了最基本的日志框架(把apache的整个<code>commons-logging</code>源码copy了过来，其中还集成了对jul、log4j和slf4j的支持)。但这种模式仅给spring自身使用</p>
+<p> spring-boot的日志使用的是slf4j+logback的模式，将juc、jcl、jboss-logging三种日志框架统一转换为slf4j(<code>*-over-slf4j</code>)，最后再使用logback来实现slf4j的api，实现统一输出日志。项目pom文件中应能看到如下依赖: </p>
+<pre class=" language-xml"><code class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>ch.qos.logback<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>logback-classic<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>ch.qos.logback<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>logback-core<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+   <span class="token comment" spellcheck="true">&lt;!-- log4j通过slf4j来代理 --></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.slf4j<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>log4j-over-slf4j<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+     <span class="token comment" spellcheck="true">&lt;!-- apache commons logging通过slf4j来代理 --></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.slf4j<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>jcl-over-slf4j<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+     <span class="token comment" spellcheck="true">&lt;!-- java.util.logging 通过slf4j来代理 --></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.slf4j<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>jul-to-slf4j<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+</code></pre>
+<p> java中的异常分为编译时异常、运行时异常，前者在java届是争议颇多。在spring框架中几乎将全部的编译时异常包装为了运行时异常，同时spring会进行捕获、确保异常不会被一直向上抛到jvm，导致程序终止。一般会使用拦截器/AOP在目标方法前后进行捕获，然后记录异常，将错误信息转为正常(httpStatusCode:200)的输出。在引入了切面编程后，异常的处理方就变成了本方法、调用方以及切点。编译时异常要求异常必须由本方法或调用方处理，所以并不适用于切面编程。</p>
+</li>
+</ol>
+<ol start="2">
+<li><p><del>可复用的工具类。spring集成的工具类在<code>spring-core</code>，也不少，但大都是供自身使用的。开发中大多使用Apache的<code>commons-*</code>以及google的<code>guava</code>，还有一个个人开发非常好用的Lombok</del>。</p>
+</li>
+<li><p>数据存储及事务。spring-jdbc对jdbc进行了封装(jdbcTemplate)，当然现在已经很少直接使用了。spring-tx提供了事务支持(将Connection绑定到线程上，ORM框架就是根据这个特性支持了spring框架的事务)。</p>
+</li>
+<li><p>高内聚低耦合。事实上，spring最受欢迎的原因就是因为这一点，IOC也好、AOP也好，都是为了满足这个要求。</p>
+<p> IOC控制翻转，即将创建对象的权利交给IOC，用户无须在核心程序手动去new对象，且无须关注这个对象本身的实现，你只需要关注它所支持的接口即可，这样主程序只依赖了抽象(抽象即为规范，一般规范在程序设计时就应该定向来很少修改，就像webApi)，即使实现发生了变化，主程序无须做任何修改。早期的避免主程序耦合具体实现的方式便是工厂模式，通过工厂去创建对象，再将对象交给主程序，无须关系如何new出对象。IOC则更高级，它本质就是将是将所有的工厂管理起来，用户使用BeanFactory用beanName或者类型就可以自动创建并获得实例。</p>
+<p> 与IOC一起还有一个DI的概念，DI即为依赖注入，这个注入不是指注入容器，DI就是为了解决容器中实例的依赖关系而诞生的。IOC中实例创建时(构造器注入)或创建后(属性和setter注入)可以依赖IOC中的其他实例。</p>
+<p> spring的IOC容器还加入了生命周期的概念(不常用，一般只用单例)</p>
+<p> AOP切面编程也是为了实现高内聚低耦合。将业务流程中的主要业务和次要业务(不影响业务流程的)拆分，核心业务流程只包含主要业务，次要业务放入切点中。当然切面编程也可以用来实现纵向业务的代码复用(继承是横向/同级别业务的代码复用)</p>
+</li>
+<li><p>可扩展性。spring本身就考虑了第三方的集成，比如mybatis、hibernate等数据库访问框架，及struts等web框架。最能体现扩展性还是IOC+spring-boot(这个专文讲<a href="/2019/04/18/springboot——源码初探/" title="springboot-源码初探">springboot-源码初探</a>)。</p>
+</li>
+<li><p><del>可维护性。这个看个人吧…</del></p>
+</li>
+</ol>
+<h2 id="springContext和beanFactory的关系"><a href="#springContext和beanFactory的关系" class="headerlink" title="springContext和beanFactory的关系"></a>springContext和beanFactory的关系</h2><p>spring最常用的包便是spring-context包，但是其实它还依赖另外5个包spring-jcl、spring-core、spring-expression、spring-beans、spring-aop。</p>
+<p>context是上下文的意思，可以理解为贯穿某个声明周期的一个变量。</p>
+<p><code>ApplicationContext</code>就是应用上下文，就是在随着spring应用启动而创建，随着spring应用关闭而销毁的一个全局的变量。类似的还有<code>ServletContext</code>，它是Servlet应用上下文。</p>
+<p>从这个层面来理解，springContext和beanFactory并没有直接的关系，只是springContext实现了beanFactory，可以为spring应用提供IOC容器(spring是以装饰器模式实现了beanFactory，真正的bean工厂是内部的DefaultListableBeanFactory)。</p>
+<p>springContext除了bean工厂，还提供了资源路径解析、系统环境获取、国际化支持、事件发布等支持。(其他的专文讲<a href="/2019/04/01/spring——springContext/" title="spring——IOC源码解析">spring——IOC源码解析</a>)</p>
+
           
         
       
@@ -862,7 +1183,7 @@ net.ipv6.conf.lo.disable_ipv6 = 1
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://thas.cc/2019/04/01/spring——IOC源码解析/">
+    <link itemprop="mainEntityOfPage" href="http://thas.cc/2019/04/01/spring——springContext/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Thas">
@@ -881,7 +1202,7 @@ net.ipv6.conf.lo.disable_ipv6 = 1
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/01/spring——IOC源码解析/" itemprop="url">spring——IOC源码解析</a></h1>
+                <a class="post-title-link" href="/2019/04/01/spring——springContext/" itemprop="url">spring——IOC源码解析</a></h1>
         
 
         <div class="post-meta">
@@ -959,7 +1280,7 @@ net.ipv6.conf.lo.disable_ipv6 = 1
 <pre class=" language-java"><code class="language-java">Object <span class="token function">getBean</span><span class="token punctuation">(</span>String name<span class="token punctuation">)</span> <span class="token keyword">throws</span> BeansException<span class="token punctuation">;</span>
 </code></pre>
 <h2 id="ApplicationContext"><a href="#ApplicationContext" class="headerlink" title="ApplicationContext"></a>ApplicationContext</h2><p><code>ApplicationContext</code>集成了多个接口，合成了一个管理应用上下文的接口，其继承结构如下图：</p>
-<p><img src="/2019/04/01/spring——IOC源码解析/20190401191515499_17508.png" alt></p>
+<p><img src="/2019/04/01/spring——springContext/20190401191515499_17508.png" alt></p>
 <ul>
 <li><code>ResourcePatternResolver</code>用于解析资源路径的，比如<code>classpath*:</code>这种路径就是该接口负责解析。</li>
 <li><code>MessageSource</code>用于读取配置文件信息，并且支持国际化。</li>
@@ -1893,173 +2214,6 @@ mappedHandler<span class="token punctuation">.</span><span class="token function
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://thas.cc/2019/03/27/spring——源码初探/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Thas">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ThasBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/27/spring——源码初探/" itemprop="url">spring——源码初探</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-27T14:53:52+08:00">
-                2019-03-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/源码解读/" itemprop="url" rel="index">
-                    <span itemprop="name">源码解读</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="spring-core"><a href="#spring-core" class="headerlink" title="spring-core"></a>spring-core</h2><p>spring框架的核心包为spring-core，其内部结构如下图：</p>
-<p><img src="/2019/03/27/spring——源码初探/20190401114608854_28132.png" alt></p>
-<p>其中包括了asm字节码操作支持、cglib代理支持、lang（NotNull）类型限定支持、objenesis对象实例化支持，自用的util工具类库，以及对spring框架的核心类库支持core：</p>
-<p><img src="/2019/03/27/spring——源码初探/20190401114957827_31033.png" alt></p>
-<p>从子包来看，核心类库主要包括annotation注解、codec编解码、convert类型转换、env环境配置、io操作、log日志、serializer序列化工具（使用java自带的）、style字符串输出美化、task（定时/异步/同步）任务调度、type（Java反射类型）。</p>
-<p>其实spring-core还有一个依赖的spring-jcl，其只是集成了<code>commons-logging</code>提供的日志规范，内部依赖的是slf4j日志框架，并适配了log4j日志框架。如果缺少依赖将使用NoOpLog，所有日志输出都会忽略。（比较常见的一种自定义日志框架思路）。</p>
-<h2 id="spring-expression"><a href="#spring-expression" class="headerlink" title="spring-expression"></a>spring-expression</h2><p>提供SpEl表达式的支持。${}只能替换字符串，#{}可以执行运算和方法</p>
-<h2 id="spring-bean"><a href="#spring-bean" class="headerlink" title="spring-bean"></a>spring-bean</h2><p>提供BeanFactory和FactoryBean的规范。</p>
-<ul>
-<li>BeanFactory是bean的生产工厂，spring容器就是基于此来实现的。</li>
-<li>FactoryBean是用来创建特定bean实例的工厂，为融合进spring框架的其他插件提供规范，比如Mybatis就实现了<code>SqlSessionFactoryBean</code>，用于创建<code>SqlSessionFactory</code>的实例。</li>
-</ul>
-<h2 id="spring-aop"><a href="#spring-aop" class="headerlink" title="spring-aop"></a>spring-aop</h2><p>aop切面编程所依赖的包，spring-aop整合进了aop联盟的标准类库，所以实际使用并不需要导入aopalliance包。spring提供了切面编程所需要的interceptor拦截器和advisor通知器以及代理创建工厂。spring-aop需要创建代理和注入代理对象，因此其依赖spring-core和spring-bean。</p>
-<p>需要注意的是，spring-aop是为用户提供的：</p>
-<ul>
-<li>spring-aop是不依赖aspectj的，在spring-context中提供了对aspectj的支持，通过<code>EnableAspectJAutoProxy</code>使用aspectj提供的aop，aspect、around、after这些比较高级的切面编程用法都是由aspectj提供的</li>
-<li>spring-tx虽然也是属于切面编程，但是其并不依赖spring-aop，自己实现了一套切面代理。</li>
-<li>spring-mvc中的interceptor不属于切面编程。</li>
-</ul>
-<h2 id="spring-context"><a href="#spring-context" class="headerlink" title="spring-context"></a>spring-context</h2><p>这个就比较牛逼了，内容非常多，包括cache缓存、context应用上下文、jmx管理扩展、remoting远程调用、scheduling定时任务、scripting脚本引擎、validation数据验证、stereotype容器注入注解、还有ui所需的数据模型ModelMap（<code>BindingAwareModelMap</code>在validation中）。这里的ui、model并非就单单是指web中的ui和模型。</p>
-<p><img src="/2019/03/27/spring——源码初探/20190401160734309_1876.png" alt></p>
-<h2 id="spring-context-support"><a href="#spring-context-support" class="headerlink" title="spring-context-support"></a>spring-context-support</h2><p>spring-context的扩展支持，注意是定时任务和freemarker支持。freemarker不仅仅只是web视图引擎。</p>
-<h2 id="spring-tx"><a href="#spring-tx" class="headerlink" title="spring-tx"></a>spring-tx</h2><p>spring事务支持。分别对dao和jca进行了实现。</p>
-<h2 id="spring-jdbc"><a href="#spring-jdbc" class="headerlink" title="spring-jdbc"></a>spring-jdbc</h2><p>jdbc支持。依赖spring-tx，以实现DataSourceTransactionManager，数据源的事务管理支持。</p>
-<h2 id="spring-web"><a href="#spring-web" class="headerlink" title="spring-web"></a>spring-web</h2><p>web连接方面的支持，其只依赖spring-core和spring-bean</p>
-<h2 id="spring-webmvc"><a href="#spring-webmvc" class="headerlink" title="spring-webmvc"></a>spring-webmvc</h2><p>webmvc框架支持，其使用spring-web实现web通信，使用spring-context进行web应用上下文管理。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2110,7 +2264,7 @@ mappedHandler<span class="token punctuation">.</span><span class="token function
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

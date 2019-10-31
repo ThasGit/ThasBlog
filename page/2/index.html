@@ -229,6 +229,173 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://thas.cc/2019/03/27/spring——源码初探/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Thas">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ThasBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/27/spring——源码初探/" itemprop="url">spring——源码初探</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-27T14:53:52+08:00">
+                2019-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/源码解读/" itemprop="url" rel="index">
+                    <span itemprop="name">源码解读</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="spring-core"><a href="#spring-core" class="headerlink" title="spring-core"></a>spring-core</h2><p>spring框架的核心包为spring-core，其内部结构如下图：</p>
+<p><img src="/2019/03/27/spring——源码初探/20190401114608854_28132.png" alt></p>
+<p>其中包括了asm字节码操作支持、cglib代理支持、lang（NotNull）类型限定支持、objenesis对象实例化支持，自用的util工具类库，以及对spring框架的核心类库支持core：</p>
+<p><img src="/2019/03/27/spring——源码初探/20190401114957827_31033.png" alt></p>
+<p>从子包来看，核心类库主要包括annotation注解、codec编解码、convert类型转换、env环境配置、io操作、log日志、serializer序列化工具（使用java自带的）、style字符串输出美化、task（定时/异步/同步）任务调度、type（Java反射类型）。</p>
+<p>其实spring-core还有一个依赖的spring-jcl，其只是集成了<code>commons-logging</code>提供的日志规范，内部依赖的是slf4j日志框架，并适配了log4j日志框架。如果缺少依赖将使用NoOpLog，所有日志输出都会忽略。（比较常见的一种自定义日志框架思路）。</p>
+<h2 id="spring-expression"><a href="#spring-expression" class="headerlink" title="spring-expression"></a>spring-expression</h2><p>提供SpEl表达式的支持。${}只能替换字符串，#{}可以执行运算和方法</p>
+<h2 id="spring-bean"><a href="#spring-bean" class="headerlink" title="spring-bean"></a>spring-bean</h2><p>提供BeanFactory和FactoryBean的规范。</p>
+<ul>
+<li>BeanFactory是bean的生产工厂，spring容器就是基于此来实现的。</li>
+<li>FactoryBean是用来创建特定bean实例的工厂，为融合进spring框架的其他插件提供规范，比如Mybatis就实现了<code>SqlSessionFactoryBean</code>，用于创建<code>SqlSessionFactory</code>的实例。</li>
+</ul>
+<h2 id="spring-aop"><a href="#spring-aop" class="headerlink" title="spring-aop"></a>spring-aop</h2><p>aop切面编程所依赖的包，spring-aop整合进了aop联盟的标准类库，所以实际使用并不需要导入aopalliance包。spring提供了切面编程所需要的interceptor拦截器和advisor通知器以及代理创建工厂。spring-aop需要创建代理和注入代理对象，因此其依赖spring-core和spring-bean。</p>
+<p>需要注意的是，spring-aop是为用户提供的：</p>
+<ul>
+<li>spring-aop是不依赖aspectj的，在spring-context中提供了对aspectj的支持，通过<code>EnableAspectJAutoProxy</code>使用aspectj提供的aop，aspect、around、after这些比较高级的切面编程用法都是由aspectj提供的</li>
+<li>spring-tx虽然也是属于切面编程，但是其并不依赖spring-aop，自己实现了一套切面代理。</li>
+<li>spring-mvc中的interceptor不属于切面编程。</li>
+</ul>
+<h2 id="spring-context"><a href="#spring-context" class="headerlink" title="spring-context"></a>spring-context</h2><p>这个就比较牛逼了，内容非常多，包括cache缓存、context应用上下文、jmx管理扩展、remoting远程调用、scheduling定时任务、scripting脚本引擎、validation数据验证、stereotype容器注入注解、还有ui所需的数据模型ModelMap（<code>BindingAwareModelMap</code>在validation中）。这里的ui、model并非就单单是指web中的ui和模型。</p>
+<p><img src="/2019/03/27/spring——源码初探/20190401160734309_1876.png" alt></p>
+<h2 id="spring-context-support"><a href="#spring-context-support" class="headerlink" title="spring-context-support"></a>spring-context-support</h2><p>spring-context的扩展支持，注意是定时任务和freemarker支持。freemarker不仅仅只是web视图引擎。</p>
+<h2 id="spring-tx"><a href="#spring-tx" class="headerlink" title="spring-tx"></a>spring-tx</h2><p>spring事务支持。分别对dao和jca进行了实现。</p>
+<h2 id="spring-jdbc"><a href="#spring-jdbc" class="headerlink" title="spring-jdbc"></a>spring-jdbc</h2><p>jdbc支持。依赖spring-tx，以实现DataSourceTransactionManager，数据源的事务管理支持。</p>
+<h2 id="spring-web"><a href="#spring-web" class="headerlink" title="spring-web"></a>spring-web</h2><p>web连接方面的支持，其只依赖spring-core和spring-bean</p>
+<h2 id="spring-webmvc"><a href="#spring-webmvc" class="headerlink" title="spring-webmvc"></a>spring-webmvc</h2><p>webmvc框架支持，其使用spring-web实现web通信，使用spring-context进行web应用上下文管理。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://thas.cc/2019/03/26/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -398,7 +565,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

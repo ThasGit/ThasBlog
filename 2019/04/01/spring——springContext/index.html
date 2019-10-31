@@ -83,16 +83,16 @@
 <meta name="keywords" content="spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="spring——IOC源码解析">
-<meta property="og:url" content="http://thas.cc/2019/04/01/spring——IOC源码解析/index.html">
+<meta property="og:url" content="http://thas.cc/2019/04/01/spring——springContext/index.html">
 <meta property="og:site_name" content="ThasBlog">
 <meta property="og:description" content="关键接口Beanfactoryorg.springframework.beans.factory.Beanfactory负责bean的提取，包含getBean的一系列重载方法。这个接口只负责输出bean。 Object getBean(String name) throws BeansException;  ApplicationContextApplicationContext集成了多个接口，合">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://thas.cc/2019/04/01/spring——IOC源码解析/20190401191515499_17508.png">
-<meta property="og:updated_time" content="2019-10-28T02:35:49.567Z">
+<meta property="og:image" content="http://thas.cc/2019/04/01/spring——springContext/20190401191515499_17508.png">
+<meta property="og:updated_time" content="2019-10-31T06:10:58.035Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spring——IOC源码解析">
 <meta name="twitter:description" content="关键接口Beanfactoryorg.springframework.beans.factory.Beanfactory负责bean的提取，包含getBean的一系列重载方法。这个接口只负责输出bean。 Object getBean(String name) throws BeansException;  ApplicationContextApplicationContext集成了多个接口，合">
-<meta name="twitter:image" content="http://thas.cc/2019/04/01/spring——IOC源码解析/20190401191515499_17508.png">
+<meta name="twitter:image" content="http://thas.cc/2019/04/01/spring——springContext/20190401191515499_17508.png">
 
 
 
@@ -122,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="http://thas.cc/2019/04/01/spring——IOC源码解析/">
+  <link rel="canonical" href="http://thas.cc/2019/04/01/spring——springContext/">
 
 
 
@@ -235,7 +235,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://thas.cc/2019/04/01/spring——IOC源码解析/">
+    <link itemprop="mainEntityOfPage" href="http://thas.cc/2019/04/01/spring——springContext/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Thas">
@@ -328,7 +328,7 @@
 <pre class=" language-java"><code class="language-java">Object <span class="token function">getBean</span><span class="token punctuation">(</span>String name<span class="token punctuation">)</span> <span class="token keyword">throws</span> BeansException<span class="token punctuation">;</span>
 </code></pre>
 <h2 id="ApplicationContext"><a href="#ApplicationContext" class="headerlink" title="ApplicationContext"></a>ApplicationContext</h2><p><code>ApplicationContext</code>集成了多个接口，合成了一个管理应用上下文的接口，其继承结构如下图：</p>
-<p><img src="/2019/04/01/spring——IOC源码解析/20190401191515499_17508.png" alt></p>
+<p><img src="/2019/04/01/spring——springContext/20190401191515499_17508.png" alt></p>
 <ul>
 <li><code>ResourcePatternResolver</code>用于解析资源路径的，比如<code>classpath*:</code>这种路径就是该接口负责解析。</li>
 <li><code>MessageSource</code>用于读取配置文件信息，并且支持国际化。</li>
@@ -504,7 +504,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
