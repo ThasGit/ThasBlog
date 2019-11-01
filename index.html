@@ -229,247 +229,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://thas.cc/2019/10/28/Java基础知识/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Thas">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ThasBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/28/Java基础知识/" itemprop="url">Java基础知识</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-28T10:35:49+08:00">
-                2019-10-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/基础知识/" itemprop="url" rel="index">
-                    <span itemprop="name">基础知识</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>面向对象的特性<br>面向对象有三大特性：封装、继承、多态。</li>
-</ul>
-<ol>
-<li>封装是指将特定的实现细节通过访问权限控制的形式“隐藏”起来，调用者只需关注怎么用即可。</li>
-<li>继承是指某个类可以通过<code>extends</code>关键字继承其父类的全部成员，以实现代码复用和功能扩展的目的。继承是多态的前提。</li>
-<li>多态就是指多种形态，同一个方法可以根据不同的子类实现呈现出不同的功能，即重写；同一个对象可以在其继承链上进行类型转换，以适应目标场景的需求或减少对自身信息的暴露。一般情况下也会将方法重载视为重载的一部分。</li>
-<li>抽象是指将某一类事物的共同特征提取出来，而无需实现，这些抽象特征将具有更宽泛的使用场景，而具体实现交给具体的实现类去实现。</li>
-</ol>
-<ul>
-<li>访问权限修饰符<br>共有public、protected、default、private四个访问权限。</li>
-</ul>
-<ol>
-<li>public是完全的公开权限，任何地方都可以访问。</li>
-<li>protected是受保护的访问权限，同包全部类以及不同包下的子类可以访问。</li>
-<li>private是私有权限，仅本类或本类的内部类可以访问到。</li>
-<li>不写修饰符，非接口代表仅同包下的类可以访问，接口内的成员不管写不写修饰符都是public访问权限</li>
-</ol>
-<ul>
-<li><p>为什么有clone<br>clone是对于引用类型而言的，一个引用对象不管经过怎样的参数传递，其代表的都是堆上的同一个实例，如果想要复制出一个额外的实例，则必须新创建一个实例，并赋予与原对象相等的成员值。clone方法可以实现这种效果。</p>
-</li>
-<li><p>new和clone的区别</p>
-</li>
-</ul>
-<ol>
-<li>new会先在内存上开辟空间，然后执行构造方法，通过构造方法对类中的数据域填充新值，最后将该对象的引用地址返回给外部。</li>
-<li>clone方法同样也是开辟一段新的内存空间，然后复制原对象的数据域的内容到该数据域，最后将该对象的引用地址返回给外部。该复制操作是JVM自动进行的。</li>
-</ol>
-<ul>
-<li><p>深拷贝和浅拷贝的区别<br>两者区别是相对于拷贝类中的引用类型而言的，JVM自动实现的clone方法，在复制引用类型的成员变量的时候，复制的只是引用地址，两个实例的相同引用类型成员变量指向同一份成员实例，称之为浅拷贝。深度拷贝需要手动实现，针对类中的引用成员变量一一操作，手动clone出新的引用成员实例，然后绑定给成员变量。</p>
-</li>
-<li><p>java中的goto关键字<br>java保留了goto关键字，但是并没有实现。java中的break可以实现跳转语句的效果，但仅限于循环语句。</p>
-</li>
-<li><p>hashcode和equals<br>hashcode可以看做equals的低配版本，hashcode相同，equals不一定true；hashcode不同，equals一定为false。hashcode必须保证自反性、对称性、传递性和一致性。</p>
-</li>
-<li><p>String是否可以继承<br>String是final类型，不可以被继承。</p>
-</li>
-<li><p>Java中的引用类型传参<br>两种观点：</p>
-</li>
-</ul>
-<ol>
-<li>引用类型传参属于引用传递。传递的参数可以对原实例做修改。</li>
-<li>不属于引用传递。java中传递引用类型时实际上是实例引用的值传递。</li>
-</ol>
-<ul>
-<li>方法重写和重载的区别</li>
-</ul>
-<ol>
-<li>方法重写是指子类对父类已有的方法进行新的实现，从而替换掉原有的方法，对父类该方法的调用将会链接到子类重新实现的方法上。重写的必要前提是继承。</li>
-<li>方法重载是编译时多态，指可以定义多个方法名相同，但参数列表不相同的方法。</li>
-</ol>
-<ul>
-<li><p>方法重写的规则<br>方法名相同，参数列表完全相同，返回值相同或更加精确，异常列表相同、更少或更加精确，访问范围相同或更大。</p>
-</li>
-<li><p>为什么返回值类型不能用来区分重载方法<br>调用方法时是不能指定返回类型的，因此调用时不能区分返回值不同的方法。比如一个带返回值的方法，是可以不接收其返回值直接调用的。</p>
-</li>
-<li><p>char类型能够存储一个汉字<br>java中char统一使用Unicode编码保存字符，所以可以保存汉字。</p>
-</li>
-<li><p>抽象类和接口区别<br>抽象类和类的区别仅仅在于，抽象类可以包含抽象方法，不可以实例化。所以抽象类和接口的区别完全可以看做类和接口的关系，它们没有半毛钱的关系。都是用来表示抽象的概念，抽象类是对象本质的抽象，通常用于存放公共属性和方法；接口用来表示对象所具备的功能。</p>
-</li>
-</ul>
-<p>抽象类可以包含属性、实现或未实现的方法、构造方法，可以实现接口，继承类，只能单继承。</p>
-<p>接口只能包含抽象方法、常量、静态方法。</p>
-<ul>
-<li>抽象方法是否可以是static、native、synchronized</li>
-</ul>
-<ol>
-<li>抽象方法不可以是static的，static与实例无关，不支持运行时多态，不能通过子类来实现或者重写。</li>
-<li>抽象方法不能是native的，native方法是JVM自动实现的，不是由Java子类实现的。</li>
-<li>可以synchronized，synchronized修饰静态方法，表示锁定该类的Class对象。</li>
-</ol>
-<ul>
-<li><p>静态变量和实例变量的区别<br>静态变量与实例无关，当类加载到内存，并完成初始化之后，静态变量就能直接被使用，可以理解为类的所有实例的共享变量。<br>实例变量在类实例化时创建，只能通过创建它的实例访问到。</p>
-</li>
-<li><p>==和equals区别</p>
-</li>
-</ul>
-<ol>
-<li>==可以比较值类型或引用类型，判断值类型是否相等或引用类型是否指向同一实例。</li>
-<li>equals判断两个引用类型是否是“相等”，但默认情况，如果不对equals实现，其功能同==。</li>
-</ol>
-<ul>
-<li>break和continue区别</li>
-</ul>
-<ol>
-<li>break退出当前层的循环，加标签表示退出标签所表示层的循环。</li>
-<li>continue退出当前层的当次循环，加标签表示退出标签所示层的当次循环。</li>
-</ol>
-<ul>
-<li><p>Java实现多态的机制<br>通过使用父类型的变量指向子类的实例实现，父类的方法的实现取决于实例化的子类。</p>
-</li>
-<li><p>Java异常分类<br>Java异常大体分为受检查异常和运行时异常。</p>
-</li>
-</ul>
-<ol>
-<li>受检查异常：异常必须要显式处理，或抛出交给调用者处理。该种异常通常无法通过优化编码解决，但可以忽略或恢复，对后续运行不产生影响。</li>
-<li>运行时异常：异常可以不进行显式处理，该种异常一般可以通过优化编码的方式避免发生，比如空指针异常和索引超界异常。</li>
-<li>Error通常不归类到异常，Error是严重的错误，无法通过程序解决。</li>
-</ol>
-<p>* </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://thas.cc/2019/10/27/spring——spring是什么/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -620,7 +379,7 @@
 <p>context是上下文的意思，可以理解为贯穿某个声明周期的一个变量。</p>
 <p><code>ApplicationContext</code>就是应用上下文，就是在随着spring应用启动而创建，随着spring应用关闭而销毁的一个全局的变量。类似的还有<code>ServletContext</code>，它是Servlet应用上下文。</p>
 <p>从这个层面来理解，springContext和beanFactory并没有直接的关系，只是springContext实现了beanFactory，可以为spring应用提供IOC容器(spring是以装饰器模式实现了beanFactory，真正的bean工厂是内部的DefaultListableBeanFactory)。</p>
-<p>springContext除了bean工厂，还提供了资源路径解析、系统环境获取、国际化支持、事件发布等支持。(其他的专文讲<a href="/2019/04/01/spring——springContext/" title="spring——IOC源码解析">spring——IOC源码解析</a>)</p>
+<p>springContext除了bean工厂，还提供了资源路径解析、系统环境获取、国际化支持、事件发布等支持。(其他的专文讲)</p>
 
           
         
@@ -1183,7 +942,7 @@ net.ipv6.conf.lo.disable_ipv6 = 1
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://thas.cc/2019/04/01/spring——springContext/">
+    <link itemprop="mainEntityOfPage" href="http://thas.cc/2019/04/01/springContext/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Thas">
@@ -1202,7 +961,7 @@ net.ipv6.conf.lo.disable_ipv6 = 1
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/01/spring——springContext/" itemprop="url">spring——IOC源码解析</a></h1>
+                <a class="post-title-link" href="/2019/04/01/springContext/" itemprop="url">springContext</a></h1>
         
 
         <div class="post-meta">
@@ -1280,7 +1039,7 @@ net.ipv6.conf.lo.disable_ipv6 = 1
 <pre class=" language-java"><code class="language-java">Object <span class="token function">getBean</span><span class="token punctuation">(</span>String name<span class="token punctuation">)</span> <span class="token keyword">throws</span> BeansException<span class="token punctuation">;</span>
 </code></pre>
 <h2 id="ApplicationContext"><a href="#ApplicationContext" class="headerlink" title="ApplicationContext"></a>ApplicationContext</h2><p><code>ApplicationContext</code>集成了多个接口，合成了一个管理应用上下文的接口，其继承结构如下图：</p>
-<p><img src="/2019/04/01/spring——springContext/20190401191515499_17508.png" alt></p>
+<p><img src="/2019/04/01/springContext/20190401191515499_17508.png" alt></p>
 <ul>
 <li><code>ResourcePatternResolver</code>用于解析资源路径的，比如<code>classpath*:</code>这种路径就是该接口负责解析。</li>
 <li><code>MessageSource</code>用于读取配置文件信息，并且支持国际化。</li>
@@ -1296,47 +1055,155 @@ net.ipv6.conf.lo.disable_ipv6 = 1
 <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> IOException<span class="token punctuation">;</span>
 </code></pre>
 <p><code>ConfigurableApplicationContext</code>内部定义了设置环境、设置父应用上下文、注册后处理器、注册协议处理器、事件发布、注册事件监听器、注册应用关闭回调方法、获取<code>BeanFactory</code>等方法。</p>
+<h2 id="ConfigurableListableBeanFactory"><a href="#ConfigurableListableBeanFactory" class="headerlink" title="ConfigurableListableBeanFactory"></a>ConfigurableListableBeanFactory</h2><p>其实现<code>DefaultListableBeanFactory</code>是真正的beanFactory，最早实现是在<code>GenericApplicationContext</code>类和<code>AbstractRefreshableApplicationContext</code>(常用)中。ApplicationContext所有关于beanFactory的操作都是用的它，并且屏蔽了设置操作(Configurable)，ApplicationContext只能使用<code>ListableBeanFactory</code>提供的get操作。</p>
+<p><code>AbstractRefreshableApplicationContext</code>中的refreshable指<strong>BeanFactory</strong>能够被销毁并重新初始化，<code>EmbeddedWeb</code>这种内置了Web容器的是不能refresh的。<del>对应的是用xml配置文件去初始化的<code>ApplicationContext</code>，而像使用注解的都是继承<code>GenericApplicationContext</code>不带refreshable的</del>。</p>
+<p>不管是哪种<code>ApplicationContext</code>，它们都是有refresh方法的，区别是能不能<code>refreshBeanFactory()</code>：</p>
+<pre class=" language-java"><code class="language-java">    <span class="token keyword">protected</span> <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">refreshBeanFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> IllegalStateException <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>refreshed<span class="token punctuation">.</span><span class="token function">compareAndSet</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//  如果已经refresh过了 再次执行将会抛出异常</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalStateException</span><span class="token punctuation">(</span>
+                    <span class="token string">"GenericApplicationContext does not support multiple refresh attempts: just call 'refresh' once"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>beanFactory<span class="token punctuation">.</span><span class="token function">setSerializationId</span><span class="token punctuation">(</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<p>springboot-web使用的容器是<code>AnnotationConfigEmbeddedWebApplicationContext</code>，它就是继承自<code>GenericApplicationContext</code>：<br><img src="/2019/04/01/springContext/20191031160117.png" alt></p>
+<h2 id="ClassPathXmlApplicationContext"><a href="#ClassPathXmlApplicationContext" class="headerlink" title="ClassPathXmlApplicationContext"></a>ClassPathXmlApplicationContext</h2><p><img src="/2019/04/01/springContext/20191031145026.png" alt></p>
 <h2 id="Environment-ConfigurableEnvironment"><a href="#Environment-ConfigurableEnvironment" class="headerlink" title="Environment/ConfigurableEnvironment"></a>Environment/ConfigurableEnvironment</h2><p>用于获得环境变量，包括Java系统属性、Java环境变量和配置文件（Properties）中的变量。</p>
-<h1 id="运作过程"><a href="#运作过程" class="headerlink" title="运作过程"></a>运作过程</h1><h2 id="ClassPathXmlApplicationContext"><a href="#ClassPathXmlApplicationContext" class="headerlink" title="ClassPathXmlApplicationContext"></a>ClassPathXmlApplicationContext</h2><p>以<code>ClassPathXmlApplicationContext</code>为例：</p>
+<h1 id="初始化过程"><a href="#初始化过程" class="headerlink" title="初始化过程"></a>初始化过程</h1><h2 id="ClassPathXmlApplicationContext-1"><a href="#ClassPathXmlApplicationContext-1" class="headerlink" title="ClassPathXmlApplicationContext"></a>ClassPathXmlApplicationContext</h2><p>以<code>ClassPathXmlApplicationContext</code>为例：</p>
 <ol>
 <li>构造方法中传入xml配置文件的路径。</li>
-<li>构造过程会调用<code>setConfigLocations</code>方法，调用<code>ConfigurableEvnironment</code>中的解析器去解析提供的路径（解析其中的SpEl表达式，获得最终需要解析的路径。如果环境不存在，将会立即创建一个<code>StandardEnvironment</code>）。</li>
-<li>设置完成之后，立即调用<code>refresh()</code>方法，根据配置文件刷新应用上下文。<code>refresh()</code>方法中调用<code>obtainFreshBeanFactory()</code>方法创建<code>BeanFactory</code>。如果<code>BeanFactory</code>已经被创建，则会先销毁原先创建的。准备一个新的<code>DefaultListableBeanFactory</code>，并挂载到应用上下文内部（装饰器模式）。</li>
-<li>创建工厂的过程中会执行<code>loadBeanDefinitions()</code>方法，使用<code>XmlBeanDefinitionReader</code>读取xml中的bean的配置，将bean的名称和类型信息添加到<code>BeanFactory</code>中去，这时候并没有做实例化工作。</li>
-<li>然后对<code>BeanFactory</code>做一下初始化工作，绑定各种属性，执行后处理器，然后还要再执行bean定义的实例化后的操作：</li>
+<li>构造过程会调用<code>setConfigLocations</code>方法，调用<code>ConfigurableEvnironment</code>中的解析器去解析提供的路径（解析其中的SpEl表达式，获得最终需要解析的路径。）如果环境不存在，将会立即创建一个<code>StandardEnvironment</code>。</li>
+<li>设置完成之后，立即调用<code>refresh()</code>方法，根据配置文件刷新应用上下文。如果修改了spring的xml配置文件，是可以通过<code>refresh</code>方法重新刷新生效的。</li>
 </ol>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//工厂初始化工作，绑定各种属性</span>
-<span class="token function">prepareBeanFactory</span><span class="token punctuation">(</span>beanFactory<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//工厂创建完成之后的操作</span>
-<span class="token function">postProcessBeanFactory</span><span class="token punctuation">(</span>beanFactory<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//执行factory的后处理器（不是bean的）</span>
-<span class="token function">invokeBeanFactoryPostProcessors</span><span class="token punctuation">(</span>beanFactory<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//注册bean中定义的processor</span>
-<span class="token function">registerBeanPostProcessors</span><span class="token punctuation">(</span>beanFactory<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// Initialize message source for this context.</span>
-<span class="token function">initMessageSource</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// Initialize event multicaster for this context.</span>
-<span class="token function">initApplicationEventMulticaster</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// Initialize other special beans in specific context subclasses.</span>
-<span class="token function">onRefresh</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// Check for listener beans and register them.</span>
-<span class="token function">registerListeners</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// 执行bean的声明周期的操作</span>
-<span class="token function">finishBeanFactoryInitialization</span><span class="token punctuation">(</span>beanFactory<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// Last step: publish corresponding event.</span>
-<span class="token function">finishRefresh</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p>refresh方法就是容器初始化的核心。</p>
+<ol>
+<li><p><code>prepareRefresh(beanFactory)</code><br> 主要工作是<code>initPropertySources()</code>。<code>PropertySources</code>就是想<code>application.propeties</code>和其他<code>*.propeties</code>这类定义属性值的配置文件。然后valid一下，校验一些必须要配置的属性。</p>
+<p> 对于<code>AnnotationConfig</code>这种根据注解去初始化容器的还需要先执行<code>this.scanner.clearCache()</code>，清理<code>ClassPathBeanDefinitionScanner</code>的缓存。</p>
+</li>
+<li><p><code>ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();</code><br> 硬翻译就是<code>获得一个新鲜的bean工厂</code>。这个时候就需要调用<code>refreshBeanFactory()</code>方法了。对于可refresh的容器，源码是这样的，不能refresh的这段是抛出异常。</p>
+<pre class=" language-java"><code class="language-java"> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">hasBeanFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         <span class="token comment" spellcheck="true">//销毁原先创建的</span>
+         <span class="token function">destroyBeans</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token function">closeBeanFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+     <span class="token keyword">try</span> <span class="token punctuation">{</span>
+         DefaultListableBeanFactory beanFactory <span class="token operator">=</span> <span class="token function">createBeanFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         beanFactory<span class="token punctuation">.</span><span class="token function">setSerializationId</span><span class="token punctuation">(</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token function">customizeBeanFactory</span><span class="token punctuation">(</span>beanFactory<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token comment" spellcheck="true">//装载bean定义</span>
+         <span class="token function">loadBeanDefinitions</span><span class="token punctuation">(</span>beanFactory<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token keyword">synchronized</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>beanFactoryMonitor<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+             <span class="token keyword">this</span><span class="token punctuation">.</span>beanFactory <span class="token operator">=</span> beanFactory<span class="token punctuation">;</span>
+         <span class="token punctuation">}</span>
+     <span class="token punctuation">}</span>
+     <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> ex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">ApplicationContextException</span><span class="token punctuation">(</span><span class="token string">"I/O error parsing bean definition source for "</span> <span class="token operator">+</span> <span class="token function">getDisplayName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> ex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
 </code></pre>
-<p><code>finishBeanFactoryInitialization()</code>过程中将会创建单例模式的bean。</p>
-<p>Bean的生命周期，实例化-&gt;<code>BeanNameAware</code>-&gt;<code>BeanFactoryAware</code>-&gt;<code>ApplicaiontContextAware</code>-&gt;<code>BeanPostProcessor</code>前置方法-&gt;<code>InitializingBean</code>-&gt;<code>BeanPostProcessor</code>后置方法。<code>DisposableBean</code>销毁方法将在执行<code>ApplicationContext.close()</code>方法时执行。</p>
-<h2 id="AnnotationConfigApplicationContext"><a href="#AnnotationConfigApplicationContext" class="headerlink" title="AnnotationConfigApplicationContext"></a>AnnotationConfigApplicationContext</h2><p><code>AnnotationConfigApplicationContext</code>与xml方式有差别，绑定bean的配置信息的操作不在<code>obtainFreshBeanFactory()</code>中进行<code>load</code>。注解扫描范围需要有<code>Configuration</code>来指定<code>ComponentScan</code>。<code>AnnotationConfigApplicationContext</code>将注解方式的bean的信息读取工作交给了做成了工厂后处理器<code>ConfigurationClassPostProcessor</code>，并由<code>ConfigurationClassParser</code>来解析。在执行<code>invokeBeanFactoryPostProcessors(beanFactory)</code>，对注解进行扫描。原型模式将不会有这样的声明周期，只负责实例化并交给用户。</p>
+</li>
+<li><p><code>prepareBeanFactory(beanFactory);</code><br> 主要是注入内置的bean。</p>
+</li>
+<li><p><code>postProcessBeanFactory(beanFactory);</code><br> 空的</p>
+</li>
+<li><p><code>invokeBeanFactoryPostProcessors(beanFactory)</code><br> 执行<code>beanFactory</code>的后处理器。这个必须手动add。这个后置处理器(<code>BeanDefinitionRegistryPostProcessor</code>)可用来手动添加一下<code>beanDefination</code>，比如使用注解注入方式的<code>ApplicationContext</code>就是用<code>ConfigurationClassPostProcessor</code>来注册<code>beanDefination</code>的。</p>
+</li>
+<li><p><code>registerBeanPostProcessors(beanFactory);</code><br> 注册bean的后处理器。这个会在<code>finishBeanFactoryInitialization</code>中创建bean时使用。在创建过程中会被内置的<code>BeanPostProcessor</code>处理，等全部创建完成再注册到容器。所有自行创建的<code>BeanPostProcessor</code>不会相互影响。</p>
+</li>
+<li><p><code>initMessageSource()</code><br> <code>MessageSource</code>是用来支持国际化的。需要定义<code>MessageSource</code>的bean这一步才有用，springboot需要创建<code>message-*.properties</code>的文件。</p>
+</li>
+<li><p><code>initApplicationEventMulticaster()</code><br> 初始化(如果定义了话)/注册(定义一个Simple多播器)事件多播器。多播器就是指当接收到事件时，将事件通知给所有监听该事件的监听器。</p>
+</li>
+<li><p><code>onRefresh();</code><br> 第一步<code>UiApplicationContextUtils.initThemeSource(this)</code> 有点类似<code>MessageSource</code>，有选择性的加载属性值，这个一般用在WebMVC的网页主题。<br> 对于<code>EmbeddedWeb</code>内置web容器类型的，还需要创建web容器，<code>createEmbeddedServletContainer()</code>，默认是Tomcat。</p>
+</li>
+<li><p><code>registerListeners();</code><br>注册事件监听器。<br><code>getApplicationEventMulticaster().addApplicationListener(listener)</code>刚刚的事件多播器有用了。隔了一个<code>onRefresh()</code>，有可能web容器也需要注册事件。<br>springApplicationEvent参考</p>
+</li>
+<li><p><code>finishBeanFactoryInitialization(beanFactory)</code><br>结束beanFactory的初始化过程/预创建单例bean。</p>
+<pre class=" language-java"><code class="language-java">
+    <span class="token comment" spellcheck="true">// 冻结bean定义 不期望这些定义被改变</span>
+    beanFactory<span class="token punctuation">.</span><span class="token function">freezeConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 初始化所有非懒加载的单例bean</span>
+    beanFactory<span class="token punctuation">.</span><span class="token function">preInstantiateSingletons</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Bean的生命周期，实例化-&gt;<code>BeanNameAware</code>-&gt;<code>BeanFactoryAware</code>-&gt;<code>BeanPostProcessor</code>前置方法-&gt;(内置Processor执行<code>ApplicaiontContextAware</code>)-&gt;<code>InitializingBean</code>-&gt;<code>BeanPostProcessor</code>后置方法。<code>DisposableBean</code>销毁方法将<code>ContextStoppedEvent</code>事件时在执行。初始化过程如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">protected</span> Object <span class="token function">initializeBean</span><span class="token punctuation">(</span><span class="token keyword">final</span> String beanName<span class="token punctuation">,</span> <span class="token keyword">final</span> Object bean<span class="token punctuation">,</span> RootBeanDefinition mbd<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>System<span class="token punctuation">.</span><span class="token function">getSecurityManager</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        AccessController<span class="token punctuation">.</span><span class="token function">doPrivileged</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">PrivilegedAction</span><span class="token operator">&lt;</span>Object<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">public</span> Object <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token function">invokeAwareMethods</span><span class="token punctuation">(</span>beanName<span class="token punctuation">,</span> bean<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">return</span> null<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token function">getAccessControlContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token function">invokeAwareMethods</span><span class="token punctuation">(</span>beanName<span class="token punctuation">,</span> bean<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    Object wrappedBean <span class="token operator">=</span> bean<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>mbd <span class="token operator">==</span> null <span class="token operator">||</span> <span class="token operator">!</span>mbd<span class="token punctuation">.</span><span class="token function">isSynthetic</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        wrappedBean <span class="token operator">=</span> <span class="token function">applyBeanPostProcessorsBeforeInitialization</span><span class="token punctuation">(</span>wrappedBean<span class="token punctuation">,</span> beanName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token function">invokeInitMethods</span><span class="token punctuation">(</span>beanName<span class="token punctuation">,</span> wrappedBean<span class="token punctuation">,</span> mbd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Throwable</span> ex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BeanCreationException</span><span class="token punctuation">(</span>
+                <span class="token punctuation">(</span>mbd <span class="token operator">!=</span> null <span class="token operator">?</span> mbd<span class="token punctuation">.</span><span class="token function">getResourceDescription</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> null<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                beanName<span class="token punctuation">,</span> <span class="token string">"Invocation of init method failed"</span><span class="token punctuation">,</span> ex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>mbd <span class="token operator">==</span> null <span class="token operator">||</span> <span class="token operator">!</span>mbd<span class="token punctuation">.</span><span class="token function">isSynthetic</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        wrappedBean <span class="token operator">=</span> <span class="token function">applyBeanPostProcessorsAfterInitialization</span><span class="token punctuation">(</span>wrappedBean<span class="token punctuation">,</span> beanName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> wrappedBean<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">invokeAwareMethods</span><span class="token punctuation">(</span><span class="token keyword">final</span> String beanName<span class="token punctuation">,</span> <span class="token keyword">final</span> Object bean<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>bean <span class="token keyword">instanceof</span> <span class="token class-name">Aware</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>bean <span class="token keyword">instanceof</span> <span class="token class-name">BeanNameAware</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token punctuation">(</span><span class="token punctuation">(</span>BeanNameAware<span class="token punctuation">)</span> bean<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setBeanName</span><span class="token punctuation">(</span>beanName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>bean <span class="token keyword">instanceof</span> <span class="token class-name">BeanClassLoaderAware</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token punctuation">(</span><span class="token punctuation">(</span>BeanClassLoaderAware<span class="token punctuation">)</span> bean<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setBeanClassLoader</span><span class="token punctuation">(</span><span class="token function">getBeanClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>bean <span class="token keyword">instanceof</span> <span class="token class-name">BeanFactoryAware</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token punctuation">(</span><span class="token punctuation">(</span>BeanFactoryAware<span class="token punctuation">)</span> bean<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setBeanFactory</span><span class="token punctuation">(</span>AbstractAutowireCapableBeanFactory<span class="token punctuation">.</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 由内置的的ApplicationContextAwareProcessor执行</span>
+<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">invokeAwareInterfaces</span><span class="token punctuation">(</span>Object bean<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>bean <span class="token keyword">instanceof</span> <span class="token class-name">Aware</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>bean <span class="token keyword">instanceof</span> <span class="token class-name">EnvironmentAware</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token punctuation">(</span><span class="token punctuation">(</span>EnvironmentAware<span class="token punctuation">)</span> bean<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setEnvironment</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>applicationContext<span class="token punctuation">.</span><span class="token function">getEnvironment</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>bean <span class="token keyword">instanceof</span> <span class="token class-name">EmbeddedValueResolverAware</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token punctuation">(</span><span class="token punctuation">(</span>EmbeddedValueResolverAware<span class="token punctuation">)</span> bean<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setEmbeddedValueResolver</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>embeddedValueResolver<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>bean <span class="token keyword">instanceof</span> <span class="token class-name">ResourceLoaderAware</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token punctuation">(</span><span class="token punctuation">(</span>ResourceLoaderAware<span class="token punctuation">)</span> bean<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setResourceLoader</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>applicationContext<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>bean <span class="token keyword">instanceof</span> <span class="token class-name">ApplicationEventPublisherAware</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token punctuation">(</span><span class="token punctuation">(</span>ApplicationEventPublisherAware<span class="token punctuation">)</span> bean<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setApplicationEventPublisher</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>applicationContext<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>bean <span class="token keyword">instanceof</span> <span class="token class-name">MessageSourceAware</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token punctuation">(</span><span class="token punctuation">(</span>MessageSourceAware<span class="token punctuation">)</span> bean<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setMessageSource</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>applicationContext<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>bean <span class="token keyword">instanceof</span> <span class="token class-name">ApplicationContextAware</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token punctuation">(</span><span class="token punctuation">(</span>ApplicationContextAware<span class="token punctuation">)</span> bean<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setApplicationContext</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>applicationContext<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</li>
+<li><p><code>finishRefresh()</code><br>结束<code>ApplicationContext</code>的刷新过程</p>
+</li>
+</ol>
+<h2 id="AnnotationConfigApplicationContext"><a href="#AnnotationConfigApplicationContext" class="headerlink" title="AnnotationConfigApplicationContext"></a>AnnotationConfigApplicationContext</h2><p><code>AnnotationConfigApplicationContext</code>与xml方式有差别，绑定beanDefinition的操作不在<code>obtainFreshBeanFactory()</code>中进行<code>load</code>。注解扫描范围需要有<code>Configuration</code>来指定<code>ComponentScan</code>。<code>AnnotationConfigApplicationContext</code>将注解方式的bean的信息读取工作交给了做成了工厂后处理器<code>ConfigurationClassPostProcessor</code>，并由<code>ConfigurationClassParser</code>来解析。在执行<code>invokeBeanFactoryPostProcessors(beanFactory)</code>，对注解进行扫描。原型模式将不会有这样的生命周期，只负责实例化并交给用户。</p>
 <h2 id="再来说说bean的实例化过程。"><a href="#再来说说bean的实例化过程。" class="headerlink" title="再来说说bean的实例化过程。"></a>再来说说bean的实例化过程。</h2><p>bean的作用域可以有singleton、prototype两种，只有单例模式的bean在<code>ApplicationContext</code>创建过程中去创建的。创建bean的过程会调用<code>getBean</code>方法，bean的实例化放在了getBean方法中。如果一个bean的构造方法参数依赖了另一个bean，那么会先暂停这个bean的创建过程，转而去执行另一个bean的创建过程。如果只是属性依赖，那么将会先完成当前bean的实例化过程，再去创建依赖的bean，然后注入给属性。因此构造方法参数循环依赖，将会造成栈溢出的问题，因为双方都没有实例化完成，会不断的去尝试创建彼此的实例。</p>
 <h2 id="WebApplicationContext-ConfigurableWebApplicationContext"><a href="#WebApplicationContext-ConfigurableWebApplicationContext" class="headerlink" title="WebApplicationContext/ConfigurableWebApplicationContext"></a>WebApplicationContext/ConfigurableWebApplicationContext</h2><p><code>WebApplicationContext</code>继承自<code>ApplicationContext</code>，加入了request、session作用域（最新版本源码没有看到global session），并且支持挂载和获取<code>ServletContext</code>、<code>ServletConfig</code>。</p>
-<p><code>ConfigurableWebApplicationContext</code>继承了原先的<code>ConfigurableApplicationContext</code>和<code>WebApplicationContext</code>。加入了<code>WebApplicationContext</code>的配置操作。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li><code>BeanFactory</code>是具有工厂功能的接口，其功能比较单一，就是生产bean。</li>
-<li><code>ApplicationContext</code>是spring的核心，其除了能够生产bean，还引入了bean的作用域和声明周期管理，还有资源路径解析、系统环境获取、国际化支持、事件发布等功能。</li>
-<li><code>WebApplicationContext</code>在<code>ApplicationContext</code>的基础上加入了web的支持，扩展了<code>request</code>和<code>session</code>作用域，并能够保存servlet应用上下文和配置。</li>
-</ul>
+<p><code>ConfigurableWebApplicationContext</code>继承了原先的<code>ConfigurableApplicationContext</code>和<code>WebApplicationContext</code>，加入了<code>WebApplicationContext</code>的配置相关的操作。</p>
 
           
         
@@ -2214,6 +2081,173 @@ mappedHandler<span class="token punctuation">.</span><span class="token function
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://thas.cc/2019/03/27/spring——源码初探/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Thas">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ThasBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/27/spring——源码初探/" itemprop="url">spring——源码初探</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-27T14:53:52+08:00">
+                2019-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/源码解读/" itemprop="url" rel="index">
+                    <span itemprop="name">源码解读</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="spring-core"><a href="#spring-core" class="headerlink" title="spring-core"></a>spring-core</h2><p>spring框架的核心包为spring-core，其内部结构如下图：</p>
+<p><img src="/2019/03/27/spring——源码初探/20190401114608854_28132.png" alt></p>
+<p>其中包括了asm字节码操作支持、cglib代理支持、lang（NotNull）类型限定支持、objenesis对象实例化支持，自用的util工具类库，以及对spring框架的核心类库支持core：</p>
+<p><img src="/2019/03/27/spring——源码初探/20190401114957827_31033.png" alt></p>
+<p>从子包来看，核心类库主要包括annotation注解、codec编解码、convert类型转换、env环境配置、io操作、log日志、serializer序列化工具（使用java自带的）、style字符串输出美化、task（定时/异步/同步）任务调度、type（Java反射类型）。</p>
+<p>其实spring-core还有一个依赖的spring-jcl，其只是集成了<code>commons-logging</code>提供的日志规范，内部依赖的是slf4j日志框架，并适配了log4j日志框架。如果缺少依赖将使用NoOpLog，所有日志输出都会忽略。（比较常见的一种自定义日志框架思路）。</p>
+<h2 id="spring-expression"><a href="#spring-expression" class="headerlink" title="spring-expression"></a>spring-expression</h2><p>提供SpEl表达式的支持。${}只能替换字符串，#{}可以执行运算和方法</p>
+<h2 id="spring-bean"><a href="#spring-bean" class="headerlink" title="spring-bean"></a>spring-bean</h2><p>提供BeanFactory和FactoryBean的规范。</p>
+<ul>
+<li>BeanFactory是bean的生产工厂，spring容器就是基于此来实现的。</li>
+<li>FactoryBean是用来创建特定bean实例的工厂，为融合进spring框架的其他插件提供规范，比如Mybatis就实现了<code>SqlSessionFactoryBean</code>，用于创建<code>SqlSessionFactory</code>的实例。</li>
+</ul>
+<h2 id="spring-aop"><a href="#spring-aop" class="headerlink" title="spring-aop"></a>spring-aop</h2><p>aop切面编程所依赖的包，spring-aop整合进了aop联盟的标准类库，所以实际使用并不需要导入aopalliance包。spring提供了切面编程所需要的interceptor拦截器和advisor通知器以及代理创建工厂。spring-aop需要创建代理和注入代理对象，因此其依赖spring-core和spring-bean。</p>
+<p>需要注意的是，spring-aop是为用户提供的：</p>
+<ul>
+<li>spring-aop是不依赖aspectj的，在spring-context中提供了对aspectj的支持，通过<code>EnableAspectJAutoProxy</code>使用aspectj提供的aop，aspect、around、after这些比较高级的切面编程用法都是由aspectj提供的</li>
+<li>spring-tx虽然也是属于切面编程，但是其并不依赖spring-aop，自己实现了一套切面代理。</li>
+<li>spring-mvc中的interceptor不属于切面编程。</li>
+</ul>
+<h2 id="spring-context"><a href="#spring-context" class="headerlink" title="spring-context"></a>spring-context</h2><p>这个就比较牛逼了，内容非常多，包括cache缓存、context应用上下文、jmx管理扩展、remoting远程调用、scheduling定时任务、scripting脚本引擎、validation数据验证、stereotype容器注入注解、还有ui所需的数据模型ModelMap（<code>BindingAwareModelMap</code>在validation中）。这里的ui、model并非就单单是指web中的ui和模型。</p>
+<p><img src="/2019/03/27/spring——源码初探/20190401160734309_1876.png" alt></p>
+<h2 id="spring-context-support"><a href="#spring-context-support" class="headerlink" title="spring-context-support"></a>spring-context-support</h2><p>spring-context的扩展支持，注意是定时任务和freemarker支持。freemarker不仅仅只是web视图引擎。</p>
+<h2 id="spring-tx"><a href="#spring-tx" class="headerlink" title="spring-tx"></a>spring-tx</h2><p>spring事务支持。分别对dao和jca进行了实现。</p>
+<h2 id="spring-jdbc"><a href="#spring-jdbc" class="headerlink" title="spring-jdbc"></a>spring-jdbc</h2><p>jdbc支持。依赖spring-tx，以实现DataSourceTransactionManager，数据源的事务管理支持。</p>
+<h2 id="spring-web"><a href="#spring-web" class="headerlink" title="spring-web"></a>spring-web</h2><p>web连接方面的支持，其只依赖spring-core和spring-bean</p>
+<h2 id="spring-webmvc"><a href="#spring-webmvc" class="headerlink" title="spring-webmvc"></a>spring-webmvc</h2><p>webmvc框架支持，其使用spring-web实现web通信，使用spring-context进行web应用上下文管理。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -2264,7 +2298,7 @@ mappedHandler<span class="token punctuation">.</span><span class="token function
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
